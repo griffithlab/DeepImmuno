@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 
 '''
@@ -12,6 +13,7 @@ import numpy as np
 import pandas as pd
 import argparse
 import os
+import sysconfig
 
 
 def seperateCNN():
@@ -170,14 +172,14 @@ def hla_df_to_dic(hla):
 
 
 def computing_s(peptide,mhc):
-
-    after_pca = np.loadtxt('./data/after_pca.txt')
-    hla = pd.read_csv('./data/hla2paratopeTable_aligned.txt',sep='\t')
+    dir_path = sysconfig.get_paths()["purelib"]
+    after_pca = np.loadtxt(os.path.join(dir_path, 'deepimmuno', 'data', 'after_pca.txt'))
+    hla = pd.read_csv(os.path.join(dir_path, 'deepimmuno', 'data', 'hla2paratopeTable_aligned.txt'),sep='\t')
     hla_dic = hla_df_to_dic(hla)
     inventory = list(hla_dic.keys())
     dic_inventory = dict_inventory(inventory)
     cnn_model = seperateCNN()
-    cnn_model.load_weights('./models/cnn_model_331_3_7/')
+    cnn_model.load_weights(os.path.join(dir_path, 'deepimmuno', 'models', 'cnn_model_331_3_7/'))
     peptide_score = [peptide]
     hla_score = [mhc]
     immuno_score = ['0']
@@ -191,14 +193,14 @@ def computing_s(peptide,mhc):
 
 
 def file_process(upload,download):
-
-    after_pca = np.loadtxt('./data/after_pca.txt')
-    hla = pd.read_csv('./data/hla2paratopeTable_aligned.txt',sep='\t')
+    dir_path = sysconfig.get_paths()["purelib"]
+    after_pca = np.loadtxt(os.path.join(dir_path, 'deepimmuno', 'data', 'after_pca.txt'))
+    hla = pd.read_csv(os.path.join(dir_path, 'deepimmuno', 'data', 'hla2paratopeTable_aligned.txt'),sep='\t')
     hla_dic = hla_df_to_dic(hla)
     inventory = list(hla_dic.keys())
     dic_inventory = dict_inventory(inventory)
     cnn_model = seperateCNN()
-    cnn_model.load_weights('./models/cnn_model_331_3_7/')
+    cnn_model.load_weights(os.path.join(dir_path, 'deepimmuno', 'models', 'cnn_model_331_3_7/'))
 
     ori_score = pd.read_csv(upload, sep=',', header=None)
     ori_score.columns = ['peptide', 'HLA']

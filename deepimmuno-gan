@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 '''
 Program to run deepimmuno-GAN to generate Pseudo-immunogenic sequences for HLA-A*0201
 '''
@@ -9,6 +10,7 @@ import numpy as np
 import pandas as pd
 import argparse
 import os
+import sysconfig
 
 
 # build the model
@@ -123,6 +125,7 @@ class real_dataset_class(torch.utils.data.Dataset):
 
 # auxiliary function during training GAN
 def sample_generator(batch_size):
+    dir_path = sysconfig.get_paths()["purelib"]
     batch_size = 64
     lr = 0.0001
     num_epochs = 100
@@ -132,7 +135,7 @@ def sample_generator(batch_size):
     d_steps = 10
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     G = Generator(hidden,seq_len,n_chars,batch_size).to(device)
-    G.load_state_dict(torch.load('./models/wassGAN_G.pth'))
+    G.load_state_dict(torch.load(os.path.join(dir_path, 'deepimmuno', 'models', 'wassGAN_G.pth')))
     noise = torch.randn(batch_size, 128).to(device)  # [N, 128]
     generated_data = G(noise)  # [N, seq_len, n_chars]
     return generated_data
