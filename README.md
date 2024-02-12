@@ -16,6 +16,12 @@ The repository for building the DeepImmuno web server: https://github.com/frankl
 
 Enjoy and don't hesitate to ask me questions (contact at the bottom), I will be responsive! Feel free to raise an issue on github page!
 
+## Installation
+
+```
+pip install git+https://github.com/griffithlab/DeepImmuno.git
+```
+
 ## Citation
 If you find that tool useful in your research, please consider citing our paper:
 
@@ -90,7 +96,7 @@ pandas = 1.1.1
 If you want to query a single epitope (peptide + HLA), for example you want to query peptide _**HPPLMNVER**_ along with _**HLA-A*0201**_. You need to
 
 ```shell
-python3 deepimmuno-cnn.py --mode "single" --epitope "HPPLMNVER" --hla "HLA-A*0201"
+deepimmuno-cnn --mode "single" --epitope "HPPLMNVER" --hla "HLA-A*0201"
 ```
 
 If you want to query multiple epitopes, you just need to prepare a csv file like this:
@@ -104,17 +110,15 @@ DDDDDDDDD,HLA-C*0702
 Then you run:
 
 ```shell
-python3 deepimmuno-cnn.py --mode "multiple" --intdir "/path/to/above/file" --outdir "/path/to/output/folder"
+deepimmuno-cnn --mode "multiple" --intdir "/path/to/above/file" --outdir "/path/to/output/folder"
 ```
 
 - *Please note, when you specify the output dir, don't include the forward slash at the end, for example, use "/Desktop" instead "/Desktop/"*
 
-- *PLease note, if python3 doesn't work, you can replace python3 to python, it depends your installed python interpreter*
-
 A full help prompt is as below:
 
 ```
-usage: deepimmuno-cnn.py [-h] [--mode MODE] [--epitope EPITOPE] [--hla HLA]
+usage: deepimmuno-cnn [-h] [--mode MODE] [--epitope EPITOPE] [--hla HLA]
                          [--intdir INTDIR] [--outdir OUTDIR]
 
 DeepImmuno-CNN command line
@@ -149,14 +153,14 @@ pandas = 1.0.5
 Pretty simple, just run like this
 
 ```shell
-python3 deepimmuno-gan.py --outdir "/path/to/store/output"
+deepimmuno-gan --outdir "/path/to/store/output"
 ```
 
 It will automatically genearte one batch, which is **64** pseudo-immunogenic peptides of **HLA-A*0201** for your. It is worth noting that, because of the way I encode the peptide, there will be a placeholder "-". 
 
 A full help prompt is as below
 ```
-usage: deepimmuno-gan.py [-h] [--outdir OUTDIR]
+usage: deepimmuno-gan [-h] [--outdir OUTDIR]
 
 DeepImmuno-GAN to generate immunogenic peptide
 
@@ -166,8 +170,6 @@ optional arguments:
 ```
 
 - *Please note, when you specify the output dir, don't include the forward slash at the end, for example, use "/Desktop" instead "/Desktop/"*
-
-- *PLease note, if python3 doesn't work, you can replace python3 to python, it depends your installed python interpreter*
 
 ## Contact
 
