@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_namespace_packages
 
 def readme():
     with open("README.md") as f:
@@ -12,7 +12,7 @@ setup(
     url='https://github.com/frankligy/DeepImmuno',
     author='Guangyuan Li, Balaji Iyer, V B Surya Prasath, Yizhao Ni, Nathan Salomonis',
     scripts=['deepimmuno-cnn', 'deepimmuno-gan'],
-    packages=['deepimmuno'],
+    packages=find_namespace_packages(),
     include_package_data=True,
     install_requires=[
         'tensorflow',
