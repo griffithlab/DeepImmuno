@@ -15,7 +15,7 @@ setup(
     packages=find_namespace_packages(),
     include_package_data=True,
     install_requires=[
-        'tensorflow',
+        'tensorflow<=2.15.1',
         'numpy',
         'pandas',
     ],
